@@ -2,7 +2,7 @@
 # that script will display Best school 10 times
 
 sentence="Best School"
-a=0
+a=1
 while [ $a -le 10 ]
 do
 	echo "$sentence"
