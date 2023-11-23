@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# that script will display Best school 10 times
+
+sentence="Best School"
+a=1
+until [ $a -eq 10 ]
+do
+	echo "$sentence"
+	((a++))
+done
