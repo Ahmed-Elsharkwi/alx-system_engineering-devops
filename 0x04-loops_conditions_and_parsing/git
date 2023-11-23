@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+git add .
+git commit -m $1
+sleep 1
+git push
+Ahmed
+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
