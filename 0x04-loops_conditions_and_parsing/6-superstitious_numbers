@@ -15,7 +15,7 @@ do
 			echo "bad luck from Italy"
 			;;
 		*)
-			echo "Best school"
+			echo "$a"
 			;;
 	esac
         ((a++))
