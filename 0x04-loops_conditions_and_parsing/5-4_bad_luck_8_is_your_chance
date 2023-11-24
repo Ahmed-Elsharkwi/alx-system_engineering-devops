@@ -11,7 +11,7 @@ do
 	elif [ $a -eq 8 ]
 	then
 		echo "good luck"
-	else
+	else 
 		echo "Best School"
 	fi
 	((a++))
