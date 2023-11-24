@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#+ displays good luck for the 8th loop iteration
+#+ displays Best School for the other iterations
+a=1
+while [ $a -le 20 ]
+do
+        case $a in
+		4)
+			echo "bad luck from China"
+			;;
+		9)
+			echo "bad luck from Japan"
+			;;
+		17)
+			echo "bad luck from Italy"
+			;;
+		*)
+			echo "Best school"
+			;;
+	esac
+        ((a++))
+done
