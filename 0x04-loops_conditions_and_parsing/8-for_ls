@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#+ displays good luck for the 8th loop iteration
+#+ displays Best School for the other iterations
+List=$(ls)
+for file in $List
+do
+	echo "$file"
+done
