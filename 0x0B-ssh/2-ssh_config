@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#edit SSH configuration file 
+Host *
+#   ForwardAgent no
+#   ForwardX11 no
+#   ForwardX11Trusted yes
+#   PasswordAuthentication no
+#   HostbasedAuthentication no
+#   GSSAPIAuthentication no
+#   GSSAPIDelegateCredentials no
+#   IdentityFile ~/.ssh/school
