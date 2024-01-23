@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# making a file
+
+service apache2 start
+echo "Hello Holberton" > /var/www/html/index.html
