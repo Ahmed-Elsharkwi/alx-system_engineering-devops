@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 #Bash script to install nginx
-apt install nginx -y
-service nginx start
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
+sudo apt install nginx -y
+sudo service nginx start
+sudo echo "Hello World!" > /var/www/html/index.nginx-debian.html
+sudo sed -i 's/^\(listen\s*80;\)/# \1\nlisten 80;/' /etc/nginx/sites-available/default
+
+sudo kill -HUP "$(cat /var/run/nginx.pid)"
