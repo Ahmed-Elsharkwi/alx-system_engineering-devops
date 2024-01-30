@@ -3,7 +3,7 @@
 apt update
 apt install nginx -y
 service nginx start
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
+echo "Hello World!" > /var/www/html/index.html
 echo "Ceci n'est pas une page" > /var/www/html/error-page.html
 printf %s "server {
     listen 80;
