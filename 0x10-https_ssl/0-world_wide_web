@@ -2,7 +2,7 @@
 # script which will print the domain and subdomain info
 
 fun (){
-	if [ -z $1 ] || [ -z $2 ]
+	if [[ -n $1 ]] && [[ -z $2 ]]
 	then
 		ip=$(dig www.$1 +noall +answer | awk '{print $NF}')
 		echo "The subdomain www is a A record and points to $ip"
@@ -12,7 +12,8 @@ fun (){
 		echo "The subdomain web-01 is a A record and points to $ip_2"
 		ip_3=$(dig web-02.$1 +noall +answer | awk '{print $NF}')
 		echo "The subdomain web-02 is a A record and points to $ip_3"
-	else
+	elif [[ -n $2 ]]
+	then
 		ip_4=$(dig $2.$1 +noall +answer | awk '{print $NF}')
                 echo "The subdomain $2 is a A record and points to $ip_4"
 	fi
