@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Pull the Ubuntu image from the Docker Hub
 docker pull ubuntu
 
