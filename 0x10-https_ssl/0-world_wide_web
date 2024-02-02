@@ -4,18 +4,18 @@
 fun (){
 	if [[ -n $1 ]] && [[ -z $2 ]]
 	then
-		ip=$(dig www.$1 +noall +answer | awk '{print $NF}')
+		ip=$(dig www.$1 | grep -A1 'ANSWER SECTION:' | grep $1 | awk ' {print $NF} ')
 		echo "The subdomain www is a A record and points to $ip"
-		ip_1=$(dig lb-01.$1 +noall +answer | awk '{print $NF}')
+		ip_1=$(dig lb-01.$1 | grep -A1 'ANSWER SECTION:' | grep $1 | awk ' {print $NF} ')
 		echo "The subdomain lb-01 is a A record and points to $ip_1"
-		ip_2=$(dig web-01.$1 +noall +answer | awk '{print $NF}')
+		ip_2=$(dig web-01.$1 | grep -A1 'ANSWER SECTION:' | grep $1 | awk ' {print $NF} ')
 		echo "The subdomain web-01 is a A record and points to $ip_2"
-		ip_3=$(dig web-02.$1 +noall +answer | awk '{print $NF}')
+		ip_3=$(dig web-02.$1 | grep -A1 'ANSWER SECTION:' | grep $1 | awk ' {print $NF} ')
 		echo "The subdomain web-02 is a A record and points to $ip_3"
 	elif [[ -n $2 ]]
 	then
-		ip_4=$(dig $2.$1 +noall +answer | awk '{print $NF}')
+		ip_4=$(dig $2.$1 | grep -A1 'ANSWER SECTION:' | grep $1 | awk ' {print $NF} ')
                 echo "The subdomain $2 is a A record and points to $ip_4"
 	fi
 }
-fun $1 $2 | sed '/^+/d'
+fun $1 $2
