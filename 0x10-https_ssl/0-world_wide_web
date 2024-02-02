@@ -18,4 +18,4 @@ fun (){
                 echo "The subdomain $2 is a A record and points to $ip_4"
 	fi
 }
-fun $1 $2
+fun $1 $2 | sed '/^+/d'
