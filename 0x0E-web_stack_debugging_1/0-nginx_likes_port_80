@@ -1,3 +1,31 @@
-#!/usr/bin/env bash
-# solve the problem of the port 80 the nginx was not connected to port 80
- sudo docker start adef5baa090b
+#!/bin/bash
+
+# Pull the Ubuntu image from the Docker Hub
+docker pull ubuntu
+
+# Create and run a Docker container from the Ubuntu image
+docker run -d --name my_nginx ubuntu
+
+# Install Nginx on the container
+docker exec my_nginx apt update
+docker exec my_nginx apt install nginx
+
+# Start Nginx on the container
+docker exec my_nginx service nginx start
+
+# Check the status of Nginx on the container
+docker exec my_nginx service nginx status
+
+# Check the syntax of the Nginx configuration file on the container
+docker exec my_nginx nginx -t
+
+# Check the open ports on the container
+docker exec my_nginx ss -nlp | grep ":80"
+
+# Test the connection to port 80 on the container
+docker exec my_nginx curl http://localhost
+
+# Fetch the default web page from the container
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' my_nginx
+curl http://<container_ip>
+
