@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # solve the problem of the port 80 the nginx was not connected to port 80
-sudo docker start my-nginx
+ sudo docker start adef5baa090b
