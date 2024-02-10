@@ -1,0 +1,85 @@
+							WHAT HAPPENES WHEN ENTER
+							"https://www.google.com"
+
+when you hit enter multiple things will happen which we will dive into:
+	
+	1- Getting the ip address from DNS
+	2- Establish tcp connection
+	3- Establish ssl / tls connection
+	4- Generating HTTPS request
+	5- Handling the HTTPS request by Firewall
+	6- Handling the HTTPS request by the load balancer
+	7- Handling the HTTPS request by web server, Application server and Database and generating the https respond
+
+ Getting the ip address from The DNS:
+	when you type the doman name google.com your browser will first search for the ip address in the cash memory of it 
+        , the operating system will search in cash memory and DNS will search also for ip address in the cash memory of it. 
+	if that ip address is not exist in those cash memories your browser will send 
+	a request to DNS to get the ip address from it.
+	
+	The DNS reslover server will do mulitple thing to get the ip address like:
+		1- THE DNS reslover will send a request to root server to know which top level domain server should go to .
+		2- THE DNS reslover will send a request to the top level domain server to know which authoritative name server should go to .
+		3- THE DNS reslover will send a request to the authoritative name server to get the ip address of the google.com .
+		4- After getting the ip address the DNS will save it in its cash memory for future use 
+		so subsequent requests for the same domain can be resolved faster.
+	
+Establish tcp connection:
+	After getting the ip address, the tcp connection will be established using three way handshanking:
+		1- Your browser will send a packet which has sequence number of the browser to the server.
+		2- Your server will respond with an acknowledgement message and the sequence number of the server. 
+		3- Your browser will send an acknowledgement message.
+
+Establish ssl / tls connection:
+	After establishing the tcp connection, the TLS should be established to make the cummunication secure 
+	and to do that some steps should happen like:
+	1- Your browser sends message which "HELLO" which has some information like:
+		"version of the TLS of your browser", "session id", "cipher algrothimes" and "random number".
+	2- The server will respond with message which contains information like:
+		"version of the TLS of your server",  "session id", "chosen cipher algrothime" and "random number".
+	3- The server will send its certificate and public key.
+	4- The server will send a message which is "HELLO DONE" which tell the browser that server has nothing else to send.
+	5- Generate session keys which will be used to encrypt and decrypt the data which will be send between the server and Your browser.
+
+Generating HTTPS request:
+	After establishing the connection between your browser and the server which has the data of the domain google.com, 
+	your browser will send an http request which will be composed of some parts:
+	1- the first request header line which will has:
+		"The http method like (GET, POST, etc ...)", "The URI or URL or the required page", "The version of http which is used".
+	2- The headers of http request which will has some information about the language of content which your browser support,
+	   the length of the content and the session_id and other information.
+	3- The body of the http request which will has the data which the user entered like (credit_card, phone_number, username).
+	4- After that your http request will be encrypted and sent to the server using tcp/ip protcol.
+
+Handling the HTTPS request by Firewall:
+	The Firewall system is one of the most imporant systems in that whole process which will Allow the https requests to pass to the load balancer,
+	or your web server.
+	In our case of the https request of the google.com, The Firewall will receive the https request and check if it valid to be passed to the load balancer or not.
+	That process will happen depending on ("the port which the request has", "the protcol which the request use" and other factors).
+
+Handling the HTTPS request by the load balancer:
+	After the https request passed from the firewall to the load balancer, the load balancer will recieve it and distribute it over the web servers.
+	The load balancer will do that to reduce the work load of one web server by using some algrothimes like "round-robin", "the least connection", 
+	"the Weight scheduling algrothime" and other algrothimes.
+	The load balancer may be use one of those algrothimes or combination of some of those algrothimes.
+
+Handling the HTTPS request by web server, Application server and Database and generating the https respond:
+	After the load balancer pass the https request to web server, the web server will receive that request using http server.
+	The http server will look for the required page by checking if the required page is static or dynamic.
+	if the required page is static, the http server will get it send it back to the clinet.
+	if the required page is not exist, the http serve will send 404 message (not found ) which show that the required page is not found.
+	if the required page is dynamic, the http server will pass the request to the application server.
+	The application server will fill the content of page using the database server.
+	The application server makes any website dynamic by handling the data which will be send by the client or retrieving data from the database server 
+	and other operations .
+
+	In our case he http server will pass the request to application server and the application server will fill the content of the data from the database server.
+	After that, the Application server will pass the required page to http server.
+	The http server will put the required page in the format the http respond which is:
+		1- The status header line which has:
+			("The version of http", "the status code", "short description for the status code").
+		2- The respond headers which has some information like (session_id, the length of the content and other headers).
+		3- The body which has content of the required page.
+		4- The respond will be encrypted and it will be sent to your client(browser) over tcp/ip.
+		5- The client(browser) will receive the respond and it will render the content of the required page which is ("the main page of google")
+		6- The Tcp connection will be closed between the client(browser) and the server.
