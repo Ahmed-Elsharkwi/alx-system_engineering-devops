@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# the script will get all the database from the DBMS and compress them into folder
+mysqldump -h localhost -u root --password="$1" --all-databases > backup.sql
+tar -czvf "$(date '+%d-%m-%Y').tar.gz" backup.sql
