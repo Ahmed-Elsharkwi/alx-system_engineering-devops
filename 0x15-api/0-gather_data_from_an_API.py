@@ -5,9 +5,9 @@ returns information about his/her TODO list progress.
 """
 
 if __name__ == "__main__":
+
     import requests
     import sys
-    import json
 
     num_1 = 0
     num_tasks = 0
