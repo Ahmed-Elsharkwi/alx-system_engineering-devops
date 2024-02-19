@@ -21,9 +21,9 @@ if __name__ == "__main__":
         num_tasks += 1
 
     user_name = user.json()[0].get("name")
-    print("Employee {} is done with tasks ({}/{}):".format(
+    print("Employee {} is done with tasks({}/{}):".format(
         user_name, num_1, num_tasks))
 
     for task in t.json():
         if task.get("completed") is True:
-            print("\t{}".format(task.get("title")))
+            print("\t {}".format(task.get("title")))
