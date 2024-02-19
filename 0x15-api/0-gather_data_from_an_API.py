@@ -26,4 +26,4 @@ if __name__ == "__main__":
 
     for task in t.json():
         if task.get("completed") is True:
-            print("\t {}".format(task.get("title")))
+            print("\t{}".format(task.get("title")))
