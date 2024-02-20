@@ -1,40 +1,29 @@
 #!/usr/bin/python3
-
 """
-script that, using this REST API, for a given employee ID
-returns information about his/her list progress """
+script that, using this REST API, for a given employee ID,
+returns information about his/her TODO list progress.
+"""
 
-import requests
-from sys import argv
+if __name__ == "__main__":
 
-if __name__ == '__main__':
-    api_url = "https://jsonplaceholder.typicode.com/"
-    user_id = argv[1]
-    try:
-        response = requests.get(api_url + "users/{}".format(user_id))
-        if response.status_code == 200:
-            users = response.json()
-            user_name = users['name']
-            response = requests.get(api_url +
-                                    "todos?userId={}".format(user_id))
+    import requests
+    import sys
 
-            if response.status_code == 200:
-                tasks = response.json()
-                total_tasks = len(tasks)
-                completed_tasks_counter = 0
-                completed_tasks = []
-                for task in tasks:
-                    if task['completed'] is True:
-                        completed_tasks_counter += 1
-                        completed_tasks.append(task['title'])
-                print("Employee {} is done with tasks({}/{}):".format(
-                        user_name, completed_tasks_counter, total_tasks))
-                for title in completed_tasks:
-                    print("\t {}".format(title))
-            else:
-                print("fail {}", response.status_code)
+    num_1 = 0
+    num_tasks = 0
+    id = sys.argv[1]
 
-        else:
-            print("Fail {}".format(response.status_code))
-    except Exception as e:
-        print("Error {}".format(e))
+    t = requests.get(f'https://jsonplaceholder.typicode.com/todos?userId={id}')
+    user = requests.get(f'https://jsonplaceholder.typicode.com/users?id={id}')
+    for task in t.json():
+        if task.get("completed") is True:
+            num_1 += 1
+        num_tasks += 1
+
+    user_name = user.json()[0].get("name")
+    print("Employee {} is done with tasks({}/{}):".format(
+        user_name, num_1, num_tasks))
+
+    for task in t.json():
+        if task.get("completed") is True:
+            print("\t {}".format(task.get("title")))
