@@ -25,10 +25,12 @@ if __name__ == "__main__":
     user_name = user.json()[0].get("username")
 
     with open(f'{id}.csv', mode='w') as employee_file:
-        employee_writer = csv.writer(employee_file, delimiter=',', quotechar='"')
+        employee_writer = csv.writer(
+                employee_file, delimiter=',', quoting=csv.QUOTE_ALL)
 
         for task in t.json():
             if task.get("completed") is True:
                 status = task.get("completed")
                 title = task.get("title")
-                employee_writer.writerow([f'{id}', f'{user_name}', f'{status}', f'{title}'])
+                employee_writer.writerow(
+                        [f"{id}", f"{user_name}", f"{status}", f"{title}"])
