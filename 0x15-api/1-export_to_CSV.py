@@ -29,8 +29,7 @@ if __name__ == "__main__":
                 employee_file, delimiter=',', quoting=csv.QUOTE_ALL)
 
         for task in t.json():
-            if task.get("completed") is True:
-                status = task.get("completed")
-                title = task.get("title")
-                employee_writer.writerow(
-                        [f"{id}", f"{user_name}", f"{status}", f"{title}"])
+            status = task.get("completed")
+            title = task.get("title")
+            employee_writer.writerow(
+                    [f"{id}", f"{user_name}", f"{status}", f"{title}"])
