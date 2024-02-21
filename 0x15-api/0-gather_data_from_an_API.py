@@ -4,18 +4,18 @@
 script that, using this REST API, for a given employee ID
 returns information about his/her list progress """
 
-import requests
-from sys import argv
 
 if __name__ == '__main__':
-    api_url = "https://jsonplaceholder.typicode.com/"
-    user_id = argv[1]
-    response = requests.get(api_url + "users/{}".format(user_id))
-    users = response.json()
-    user_name = users['name']
-    response = requests.get(api_url + 
-            "todos?userId={}".format(user_id))
-    tasks = response.json()
+    import requests
+    import sys
+
+
+    user_id = sys.argv[1]
+
+    user = requests.get(f'https://jsonplaceholder.typicode.com/users?id={user_id}')
+    user_name = user.json()[0].get("name")
+    t = requests.get("https://jsonplaceholder.typicode.com/todos?userId={}".format(user_id))
+    tasks = t.json()
     total_tasks = len(tasks)
     completed_tasks_counter = 0
     completed_tasks = []

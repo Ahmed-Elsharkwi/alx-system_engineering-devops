@@ -14,16 +14,15 @@ if __name__ == "__main__":
     id = sys.argv[1]
 
     t = requests.get(f'https://jsonplaceholder.typicode.com/todos?userId={id}')
-    user = requests.get(f'https://jsonplaceholder.typicode.com/users/{id}')
+    user = requests.get(f'https://jsonplaceholder.typicode.com/users?id={id}')
     for task in t.json():
         if task.get("completed") is True:
             num_1 += 1
         num_tasks += 1
 
-    user_name = user.json().get("name")
+    user_name = user.json()[0].get("name")
     print("Employee {} is done with tasks({}/{}):".format(
         user_name, num_1, num_tasks))
-
     for task in t.json():
         if task.get("completed") is True:
             print("\t {}".format(task.get("title")))
