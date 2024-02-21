@@ -21,17 +21,13 @@ if __name__ == "__main__":
             num_1 += 1
         num_tasks += 1
 
-    user_name = user.json()[0].get("username")
+    us = user.json()[0].get("username")
 
     with open(f'{id}.json', 'w') as file_name:
         dict_1 = {f"{id}": []}
         for task in t.json():
-            task_title = task["title"]
+            tas = task["title"]
             status = task["completed"]
-            if status is True:
-                status = "true"
-            else:
-                status = "false"
-            dict_2 = {"task": f"{task_title}", "completed": f"{status}", "username": f"{user_name}"}
-            dict_1[f"{id}"].append(dict_2)
+            dic = {"task": f"{tas}", "completed": status, "username": f"{us}"}
+            dict_1[f"{id}"].append(dic)
         json.dump(dict_1, file_name)
