@@ -25,5 +25,4 @@ def top_ten(subreddit):
                 counter += 1
 
     else:
-        return None
-top_ten("programming")
+        print(None)
